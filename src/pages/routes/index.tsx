@@ -57,7 +57,7 @@ const RoutePage: NextPage = () => {
             <div className={styles['dropdown-wrapper']}>
               <Dropdowns data={CityData} defaultLabel={CityData.defaultValue.label} defaultValue={CityData.defaultValue.value} onClick={(val: string) => handleOnChange('city', val)}/>
             </div>
-            <Lists data={routes.routes} type="route"/>
+            {/* <Lists data={routes.routes} type="route"/> */}
           </div>
           <MyMap data={routes} center={routes.center} type="route"/>
         </div>

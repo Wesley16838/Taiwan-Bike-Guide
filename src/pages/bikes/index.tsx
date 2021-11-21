@@ -77,7 +77,7 @@ const BikePage: NextPage = () => {
               <Dropdowns arrayData={AreaData.get(search.city) || []} defaultLabel={search.area === '' ? '選擇鄉鎮' : search.area} defaultValue={search.area === '' ? '' : search.area} onClick={(val: string) => handleOnChange('area', val)}/>
             </div>
             <Switch isToggle={option!=='rent'} onToggle={() => setOption(option==='rent' ? 'return' : 'rent')} data={['租借','停車']}/>
-            <Lists data={bikes.available} stationData={bikes.stations} type="bike"/>
+            {/* <Lists data={bikes.available} stationData={bikes.stations} type="bike"/> */}
           </div>
           <MyMap option={option} data={bikes.available} stationData={bikes.stations} center={bikes.center} type="bike"/>
         </div>
