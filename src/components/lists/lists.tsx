@@ -10,13 +10,14 @@ import locationIcon from "../../../public/images/location_icon.svg"
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 export const listItemStyleOne = (stationData: any, data: any, index: number) => {
-    const { map } = UseMapContext();
+    const { map, userLocation } = UseMapContext();
     const newObject = data.find((obj: any) => {
         return obj.StationUID === stationData.StationUID
     })
     const name = stationData.StationName['Zh_tw']
     let status = "";
     const position = stationData.StationPosition
+    const indexNum = userLocation.latitute === '' ? index : index + 1
     switch (newObject.ServiceStatus){
         case 0:
             status = "停止營運"
@@ -44,8 +45,8 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
         <div 
             className={styles['list-item--one']} 
             key={name} 
-            onMouseEnter={() => map._markers[index].togglePopup()} 
-            onMouseLeave={() => map._markers[index].togglePopup()}
+            onMouseEnter={() => map._markers[indexNum].togglePopup()} 
+            onMouseLeave={() => map._markers[indexNum].togglePopup()}
             onClick={()=>{
                 if(position!==undefined) {
                     map.flyTo({
@@ -81,7 +82,7 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
 }
 
 export const listItemStyleTwo = (data: any, index: number) => {
-    const { map } = UseMapContext();
+    const { map, userLocation } = UseMapContext();
     const name = data.RouteName
     const city = data.City
     const town = data.Town
@@ -92,14 +93,15 @@ export const listItemStyleTwo = (data: any, index: number) => {
     const coordinates = data.Geometry.substring(18, data.Geometry.length - 2).split(',').map((item: any) => {
         return item.split(' ')
     })
+    const indexNum = userLocation.latitude === '' ? 0 : 1
     return(
         <div className={styles['list-item--two']} key={name} 
         onClick={()=> {
             const mapLayer = map.getLayer('route');
 
             if(typeof mapLayer !== 'undefined') {
-                map._markers[0].remove();
-                map._markers[0].remove();
+                map._markers[indexNum].remove();
+                map._markers[indexNum].remove();
                 map.removeLayer('route').removeSource('route');
             }
             const el = document.createElement('div');
@@ -189,18 +191,19 @@ export const listItemStyleTwo = (data: any, index: number) => {
 }
 
 export const listItemStyleThree = (data: any, index: number, onClick: any) => {
-    const { map } = UseMapContext();
+    const { map, userLocation } = UseMapContext();
     const name = data?.Name ? data.Name : data.RestaurantName
     const city = data.City
     const url = data?.WebsiteUrl ? data.WebsiteUrl : ""
     const className = data?.Class ? data.Class : ""
     const position = data.Position
+    const indexNum = userLocation.latitute === '' ? index : index + 1
     return(
         <div 
             className={styles['list-item--three']} 
             key={name+index} 
-            onMouseEnter={() => map._markers[index].togglePopup()} 
-            onMouseLeave={() => map._markers[index].togglePopup()}
+            onMouseEnter={() => map._markers[indexNum].togglePopup()} 
+            onMouseLeave={() => map._markers[indexNum].togglePopup()}
             onClick={()=>{
                 if(position!==undefined) {
                     map.flyTo({

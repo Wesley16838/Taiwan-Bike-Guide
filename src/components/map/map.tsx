@@ -6,14 +6,15 @@ import locationLight from "../../../public/images/location_light.svg"
 import phone from "../../../public/images/phone.svg"
 import { postcal } from '../../constants'
 import { UseMapContext } from "../../context/mapProvider";
+import { useDeepEffect } from '../../hooks/useDeepEffect'
 import { MapProps } from "../../types/components";
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 const Map = ({data, stationData, center, type, option, userLocation}: MapProps) => {
     const { addMap } = UseMapContext()
-
-    useEffect(() => {
+    console.log('userLocation,', userLocation)
+    useDeepEffect(() => {
         const loadMap = () => {
             const map = new mapboxgl.Map({
                 container: "my-map",
