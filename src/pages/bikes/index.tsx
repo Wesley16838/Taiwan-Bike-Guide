@@ -77,7 +77,7 @@ const BikePage: NextPage = () => {
             <Switch isToggle={option!=='rent'} onToggle={() => setOption(option==='rent' ? 'return' : 'rent')} data={['租借','停車']}/>
             <Lists data={bikes.available} stationData={bikes.stations} type="bike"/>
           </div>
-          <MyMap option={option} data={bikes.available} stationData={bikes.stations} center={bikes.center} type="bike"/>
+          {/* <MyMap option={option} data={bikes.available} stationData={bikes.stations} center={bikes.center} type="bike"/> */}
         </div>
     </Layout>
   )
