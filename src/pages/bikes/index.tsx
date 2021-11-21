@@ -8,10 +8,8 @@ import Dropdowns from '../../components/dropdown/dropdown'
 import Lists from '../../components/lists/lists'
 import Switch from '../../components/switch/switch'
 import { CityData, AreaData } from '../../constants'
-import { availableBike, station } from '../../constants/mock-date'
 import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
-import { useBike } from "../../context/bikeProvider";
 
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 

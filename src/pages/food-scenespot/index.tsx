@@ -11,7 +11,6 @@ import Modal from '../../components/modal/modal'
 import { CityData, AreaData, postcal } from '../../constants'
 import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
-import { useFood } from "../../context/foodProvider"
 
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 

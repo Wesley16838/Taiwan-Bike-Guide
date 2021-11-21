@@ -6,11 +6,9 @@ import styles from '../../styles/pages/Home.module.scss'
 import Layout from '../../components/layout/layout'
 import Dropdowns from '../../components/dropdown/dropdown'
 import Lists from '../../components/lists/lists'
-import { CityData, AreaData } from '../../constants'
-import { availableBike, station } from '../../constants/mock-date'
+import { CityData } from '../../constants'
 import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
-import { useBike } from "../../context/bikeProvider";
 
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
