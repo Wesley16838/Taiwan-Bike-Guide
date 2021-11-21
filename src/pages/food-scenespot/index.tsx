@@ -112,7 +112,7 @@ const FoodScenespotPage: NextPage = () => {
               <Dropdowns arrayData={AreaData.get(search.city) || []} defaultLabel={search.area === '' ? '選擇鄉鎮' : search.area} defaultValue={search.area === '' ? '' : search.area} onClick={(val: string) => handleOnChange('area', val)}/>             
             </div>
             <Switch isToggle={search.option !== 'Restaurant'} onToggle={() => setSearch({...search, option: search.option === 'Restaurant' ? 'ScenicSpot': 'Restaurant'})} data={['美食', '景點']}/>
-            {/* <Lists data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } type="food" onClick={(val: any)=>handleOnListClick(val)}/> */}
+            <Lists data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } type="food" onClick={(val: any)=>handleOnListClick(val)}/>
           </div>
           <Modal select={select} onClick={setIsShow} isShow={isShow}/>
           <MyMap data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } center={search.option==='Restaurant' ? foods.center : scenespots.center} type="food"/>
