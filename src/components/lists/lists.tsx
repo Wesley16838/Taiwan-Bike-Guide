@@ -206,6 +206,7 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
                             src={locationIcon}                            
                             width={13}
                             height={16}
+                            alt={'location'}
                         />
                         {city}
                     </div>
@@ -221,6 +222,7 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
                                 src={url===''? '/images/disabled_web.svg' : '/images/web.svg'}
                                 width={26}
                                 height={26}
+                                alt={'url'}
                             />
                         </a>
                     </Link>

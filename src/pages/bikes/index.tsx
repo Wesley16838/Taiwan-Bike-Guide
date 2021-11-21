@@ -64,7 +64,9 @@ const BikePage: NextPage = () => {
     }
   }
 
-  let number = bikes.stations.length
+  // let number = bikes.stations.length
+  let number = 10
+  
   return (
     <Layout pageTitle={`自行車道地圖資訊整合網`} description={"全台自行車道報你知，自行車道和車站通通有！"} previewImage={"/images/preview_image.png"}>
         <div className={styles['main-block']}>

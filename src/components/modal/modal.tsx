@@ -30,6 +30,7 @@ const Modal = ({select, onClick, isShow}: ModalProps) => {
                             src={locationIcon}
                             width={12}
                             height={12}
+                            alt={'location'}
                         />
                         {select.address}
                     </div>
@@ -38,6 +39,7 @@ const Modal = ({select, onClick, isShow}: ModalProps) => {
                             src={time}
                             width={12}
                             height={12}
+                            alt={'time'}
                         />
                         {select.time}
                     </div>
@@ -46,6 +48,7 @@ const Modal = ({select, onClick, isShow}: ModalProps) => {
                             src={phone}
                             width={12}
                             height={12}
+                            alt={'phone'}
                         />
                         {select.phone}
                     </div>
@@ -58,7 +61,7 @@ const Modal = ({select, onClick, isShow}: ModalProps) => {
                     select.image !== '' && 
                     <Image
                         src={select.image}
-                        alt={select.imageAlt}    
+                        alt={select.imageAlt || 'Image'}    
                         layout={'fill'}
                         objectFit={'cover'}
                     />
