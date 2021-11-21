@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import dynamic from "next/dynamic"
 import { useEffect, useState } from 'react'
-import Lottie from 'react-lottie';
 import styles from '../../styles/pages/Home.module.scss'
 import Layout from '../../components/layout/layout'
 import Dropdowns from '../../components/dropdown/dropdown'
