@@ -16,7 +16,8 @@ import { useFood } from "../../context/foodProvider"
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
 const FoodScenespotPage: NextPage = () => {
-  const {food, scenespot, loading, addFood, addScenespot, addLoading} = useFood()
+  console.log('FoodScenespotPage')
+  const [load, setLoad] = useState(false)
   const [select, setSelected] = useState({
     name:'',
     address:'',
@@ -46,7 +47,6 @@ const FoodScenespotPage: NextPage = () => {
   // todo list could add filter for food and scene
   useEffect(()=> {
     const loadData = async() => {
-        addLoading(true)
         try{ 
            const city = search.city === 'Taoyuan' ? 'Taoyuan City' : search.city === 'NewTaipei' ? 'new taipei': search.city
             const result = await GEOAPI.get(encodeURI(`/${city} ${search.area}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`))
@@ -59,7 +59,6 @@ const FoodScenespotPage: NextPage = () => {
                 } else {
                     setScenespot({scenespot: data.data, center})
                 }
-                addLoading(false)
             })
             .catch(err => {
                 console.log('err,', err)
@@ -67,7 +66,6 @@ const FoodScenespotPage: NextPage = () => {
         }catch(err){
             // Handle Error Message here
             console.log('err,', err)
-            addLoading(false)
         }
     }
     if(search.area !== '') loadData()

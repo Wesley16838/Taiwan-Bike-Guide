@@ -11,8 +11,8 @@ var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 const Map = ({data, stationData, center, type, option}: MapProps) => {
-    const { map, addMap } = UseMapContext()
-    const [maps, setMaps] = useState(null)
+    console.log('Map')
+    const { addMap } = UseMapContext()
 
     useEffect(() => {
         const loadMap = () => {
@@ -97,10 +97,8 @@ const Map = ({data, stationData, center, type, option}: MapProps) => {
                     const markerDiv = marker.getElement();
                     markerDiv.addEventListener('onclick', () => marker.togglePopup());
                 })
-                setMaps(map)
                 addMap(map)
             } else if (center.length !== 0 && type === 'route'){
-                setMaps(map)
                 addMap(map)
             } else if (center.length !== 0 && type === 'food'){
                 
@@ -128,7 +126,6 @@ const Map = ({data, stationData, center, type, option}: MapProps) => {
                     const markerDiv = marker.getElement();
                     markerDiv.addEventListener('onclick', () => marker.togglePopup());
                 })
-                setMaps(map)
                 addMap(map)
             }
         }

@@ -16,7 +16,7 @@ import { useBike } from "../../context/bikeProvider";
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
 const BikePage: NextPage = () => {
-  const {bike, loading, addBike, addLoading} = useBike()
+  console.log('BikePage')
   const [load, setLoad] = useState(false)
   const [bikes, setBikes] = useState({
     stations: [],
@@ -32,7 +32,6 @@ const BikePage: NextPage = () => {
   // todo list promise all available and all regoin station
   useEffect(()=> {
     const loadData = async() => {
-        setLoad(true)
         try{ 
             const city = search.city === 'Taoyuan' ? 'Taoyuan City' : search.city === 'NewTaipei' ? 'new taipei': search.city
             const result = await GEOAPI.get(encodeURI(`/${city} ${search.area}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`))
@@ -48,7 +47,6 @@ const BikePage: NextPage = () => {
                     stations: data[0].data,
                     available: data[1].data
                 })
-                setLoad(false)
             })
             .catch(err => {
                 console.log('err,', err)
@@ -56,7 +54,6 @@ const BikePage: NextPage = () => {
         }catch(err){
             // Handle Error Message here
             console.log('err,', err)
-            setLoad(false)
         }
     }
     if(search.area !== '') loadData()

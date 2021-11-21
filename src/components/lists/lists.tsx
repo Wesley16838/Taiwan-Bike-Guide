@@ -233,6 +233,7 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
 
 // todo list => use stationData to loop not data
 const Lists = ({data, stationData, type, onClick}: ListProps) => {
+    console.log('lists')
     const renderList = () => {
         if(type === 'bike'){
             if(data.length !==0 && stationData.length === 0){

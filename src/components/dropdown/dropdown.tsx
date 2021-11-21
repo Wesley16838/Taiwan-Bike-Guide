@@ -6,6 +6,7 @@ import dropdownIcon from '../../../public/images/dropdown_icon.svg'
 // import { useTourisms } from "../../context/tourismProvider"; //Activity
 
 const Dropdowns = ({data, arrayData, onClick, defaultLabel, defaultValue, label}: DropDownProps) => {
+    console.log('Dropdowns')
     const [open, setOpen] = useState(false);
     const [selection, setSelection] = useState({
         value: defaultValue,
@@ -19,7 +20,7 @@ const Dropdowns = ({data, arrayData, onClick, defaultLabel, defaultValue, label}
             label: defaultLabel,
         })
     }, [defaultValue, defaultLabel])
-    
+
     useEffect(() => {
         function handleClickOutside(event: any) {
           if (dropdownRef.current && !dropdownRef?.current?.contains(event.target)) {
@@ -47,7 +48,7 @@ const Dropdowns = ({data, arrayData, onClick, defaultLabel, defaultValue, label}
 
     return(
         <div className={styles.wrapper} aria-labelledby="action menu" ref={dropdownRef}>
-            <div className={`${styles.action} ${open ? styles.open : ''} ${arrayData !== undefined && arrayData.length === 0 ? styles.disabled : ''}`} tabIndex={0} role="button" onClick={() => handleOnToggle()}>
+            <div className={`${styles.action} ${open ? styles.open : ''} ${arrayData !== undefined ? styles.disabled : ''}`} tabIndex={0} role="button" onClick={() => handleOnToggle()}>
                 <p>{selection.label}</p>
                 <div className={styles.arrow}>
                     <Image
