@@ -5,13 +5,13 @@ import location from "../../../public/images/location_icon.svg"
 import locationLight from "../../../public/images/location_light.svg"
 import phone from "../../../public/images/phone.svg"
 import { postcal } from '../../constants'
-import { useMapContext } from "../../context/mapProvider";
+import { UseMapContext } from "../../context/mapProvider";
 import { MapProps } from "../../types/components";
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 const Map = ({data, stationData, center, type, option}: MapProps) => {
-    const { map, addMap } = useMapContext()
+    const { map, addMap } = UseMapContext()
     const [maps, setMaps] = useState(null)
 
     useEffect(() => {

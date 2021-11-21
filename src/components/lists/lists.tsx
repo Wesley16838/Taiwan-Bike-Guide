@@ -3,14 +3,14 @@ import styles from "./Lists.module.scss"
 import sharedStyle from "../../styles/base/Styles.module.scss"
 import Image from 'next/image'
 import Link from "next/link"
-import { useMapContext } from "../../context/mapProvider"
+import { UseMapContext } from "../../context/mapProvider"
 import startIcon from "../../../public/images/start.png"
 import endIcon from "../../../public/images/end.png"
 import locationIcon from "../../../public/images/location_icon.svg"
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 
 export const listItemStyleOne = (stationData: any, data: any, index: number) => {
-    const { map } = useMapContext();
+    const { map } = UseMapContext();
     const newObject = data.find((obj: any) => {
         return obj.StationUID === stationData.StationUID
     })
@@ -67,7 +67,7 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
 }
 
 export const listItemStyleTwo = (data: any, index: number) => {
-    const { map } = useMapContext();
+    const { map } = UseMapContext();
     const name = data.RouteName
     const city = data.City
     const town = data.Town
@@ -175,7 +175,7 @@ export const listItemStyleTwo = (data: any, index: number) => {
 }
 
 export const listItemStyleThree = (data: any, index: number, onClick: any) => {
-    const { map } = useMapContext();
+    const { map } = UseMapContext();
     const name = data?.Name ? data.Name : data.RestaurantName
     const city = data.City
     const url = data?.WebsiteUrl ? data.WebsiteUrl : ""

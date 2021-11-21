@@ -9,7 +9,7 @@ export const MapContext = createContext<MapContextState>(
     contextDefaultValues
 );
   
-export function useMapContext() {
+export function UseMapContext() {
     return useContext(MapContext);
 }
 
