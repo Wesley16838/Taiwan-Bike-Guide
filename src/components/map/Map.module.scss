@@ -1,0 +1,32 @@
+@import '../../styles/utilities/main.scss';
+.map-container{
+    height: calc(100vh - 88px);
+    // width: calc(100% - 425px)
+    width: 100%;
+}
+
+.pop-up-container{
+    width: '296px';
+    height: '64px'; 
+    display: 'flex'; 
+    flex-direction: 'column';
+    justify-content: 'space-between';
+}
+.pop-up-food-container{
+    display: 'flex'; 
+    flex-direction: 'column';
+    justify-content: 'space-between';
+}
+.info{
+    width: 150px;
+}
+
+.status{
+    width: 69px;
+    height: 28px;
+    @include round-corner($PRIMARY_NORMAL);
+    @include flex-center(unset);
+    p{
+        margin-left: 5px;
+    }
+}

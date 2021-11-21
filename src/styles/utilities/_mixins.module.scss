@@ -1,0 +1,112 @@
+@import './variable.module';
+// RWD
+@mixin mobile {
+    @media (min-width: #{$BREAKPOINT_MOBILE}) {
+      @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$BREAKPOINT_TABLET}){
+      @content;
+    }
+}
+  
+@mixin desktop {
+    @media (min-width: #{$BREAKPOINT_DESKTOP}) {
+      @content;
+    }
+}
+
+@mixin onlytablet {
+    @media (min-width: #{$BREAKPOINT_TABLET}) and (max-width: #{$BREAKPOINT_DESKTOP - 1px}){
+      @content;
+    }
+}
+
+/* flex */
+@mixin flex-center($direction) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-center-start($direction) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: $direction;
+}
+
+@mixin flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flex-row-space($align) {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: $align;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flex-column-space($align) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: $align;
+}
+@mixin flex-column-evenly($align){
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: $align;
+}
+
+// position
+@mixin absolute-bottom($offset) {
+  position: absolute;
+  bottom: $offset;
+}
+
+@mixin absolute-left-top($offsetLeft, $offsetTop) {
+  position: absolute;
+  left: $offsetLeft;
+  top: $offsetTop;
+}
+
+// transition
+@mixin transition-normal($from, $to) {
+  transition: $TRANSITION;
+  opacity: $from;
+  &:hover{
+      opacity: $to;
+  }
+}
+
+//Component box-shadow: 3px 3px 10px rgb(118 118 118 / 20%);
+@mixin topnav {
+    box-shadow: $SHADOW;
+}
+
+@mixin leftblock {
+  box-shadow: 0px 4px 6px 0px $BLACK400;
+}
+
+
+@mixin card{
+    background: $WHITE;
+    box-shadow: 0px 2px 8px $SHADOW;
+    border-radius: 4px;
+}
+
+@mixin round-corner($color) {
+  border-radius: 4px;
+  border: 1px solid $color;
+}

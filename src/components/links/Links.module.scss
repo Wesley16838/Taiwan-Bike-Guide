@@ -1,0 +1,15 @@
+@import '../../styles/utilities/main.scss';
+.link{
+    font-size: $MEDIUM_FONT;
+    font-weight: $NORMAL_FONT;
+    position: relative;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    margin: 0px 4px;
+    @include transition-normal(1, .6);
+    &.actived{
+        color: $PRIMARY_NORMAL;
+    }
+}

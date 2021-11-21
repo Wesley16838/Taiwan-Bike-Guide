@@ -1,0 +1,39 @@
+@import '../utilities/main.scss';
+.search-block{
+    width: 425px;
+    height: 100%;
+    z-index: 9998;
+    background-color: $WHITE;
+    @include absolute-left-top(0px, 0px);
+    @include leftblock;
+    .search-result{
+        padding: 28px 32px 0px 32px;
+        margin: 0px;
+        .search-result-count{
+            margin-left: 12px;
+            font-size: $MEDIUM_FONT;
+            color: $BLACK400
+        }
+    }
+}
+
+.main-block{
+    overflow: hidden;
+    position: relative;
+    @include flex-row;
+}
+
+.dropdown-wrapper{
+    width: 380px;
+    margin: 8px 0px;
+    padding: 0px 32px;
+    @include flex-row-space(center);
+}
+
+.loading-container{
+    background-color: $WHITE;
+    width: 100%;
+    height: 100%;
+    top: 104px;
+    @include flex-center(unset)
+}

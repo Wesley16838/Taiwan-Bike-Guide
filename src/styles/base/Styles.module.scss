@@ -1,0 +1,10 @@
+@import '../utilities/main.scss';
+.flex-row--space{
+    width: 100%;
+    @include flex-row-space(center)
+}
+
+.flex-column--space{
+    width: 100%;
+    @include flex-column-space(center)
+}

@@ -1,0 +1,5 @@
+@import '../../styles/utilities/main.scss';
+.container{
+    width: 100%;
+    @include flex-center(row);
+}

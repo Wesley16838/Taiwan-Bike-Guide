@@ -1,0 +1,63 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.mapboxgl-popup {
+  width: 344px !important;
+  max-width: 344px !important;
+  height: 96px !important;
+}
+
+.mapboxgl-popup-content{
+  height: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  padding: 0px !important;
+}
+
+.pop-up-container{
+  width: 100% !important;
+  height: 100% !important;
+  padding: 16px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.mapboxgl-popup-close-button{
+  outline-style: none;
+}
+
+.marker {
+  background-image: url('/images/pin.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 62px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -20px;
+}
+
+.mapboxgl-popup{
+  top: -35px;
+}

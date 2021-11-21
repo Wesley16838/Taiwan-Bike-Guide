@@ -1,0 +1,59 @@
+@import '../../styles/utilities/main.scss';
+.modal{
+    position: absolute;
+    height: 310px;
+    width: calc(100% - 425px);
+    right: 0px;
+    bottom: -310px;
+    z-index: 9997;
+    background-color: $WHITE;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 36px;
+    @include topnav;
+    .detail{
+        width: 600px;
+    }
+    .modal-image{
+        width: 276px;
+        height: 162px;
+        position: relative;
+    }
+    .modal-title{
+        font-weight: $BOLD_FONT;
+        font-size: $SUPER_LARGE_FONT;
+    }
+    .modal-info{
+        font-weight: $NORMAL_FONT;
+        font-size: $MEDIUM_FONT;
+        color: $GRAY400;
+        display: grid;
+        grid-template-columns: 12px auto;
+        column-gap: 5px;
+    }
+    .modal-detail{
+        font-weight: $NORMAL_FONT;
+        font-size: $SMALL_FONT;
+        color: $GRAY500;
+        margin-top: 16px;
+    }
+}
+
+.modalOpen {
+    animation: openModal 0.4s ease-out forwards;
+}
+.modalClosed {
+    animation: closeModal 0.4s ease-out forwards;
+}
+
+@keyframes openModal {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-310px);   }
+}
+
+@keyframes closeModal {
+    0% { transform: translateY(-310px); }
+    100% { transform: translateY(0px);}
+}
