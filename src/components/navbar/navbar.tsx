@@ -2,17 +2,17 @@ import Links from '../links/links'
 import Image from 'next/image'
 import styles from './Navbar.module.scss'
 import logo from '../../../public/images/logo.svg'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 const Navbar = () => {
     console.log('Navbar')
     const [nav, setNav] = useState(false)
-    const listenScrollEvent = () => {
+    const listenScrollEvent = useCallback(() => {
         if (window.scrollY > 100) {
             setNav(true)
         } else if(window.scrollY <= 100){
             setNav(false)
         }
-      }
+      }, [])
 
     useEffect(() => {
         window.addEventListener('scroll', listenScrollEvent);

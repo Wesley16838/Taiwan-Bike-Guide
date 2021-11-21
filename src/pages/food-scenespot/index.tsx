@@ -67,7 +67,7 @@ const FoodScenespotPage: NextPage = () => {
         }
     }
     if(search.area !== '') loadData()
-  }, [search.area, search.option])
+  }, [search.city, search.area, search.option])
 
   const handleOnChange = (name: string, value: string) => {
     if(name === 'city'){
