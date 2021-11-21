@@ -4,7 +4,6 @@ import styles from './Navbar.module.scss'
 import logo from '../../../public/images/logo.svg'
 import { useCallback, useEffect, useState } from 'react'
 const Navbar = () => {
-    console.log('Navbar')
     const [nav, setNav] = useState(false)
     const listenScrollEvent = useCallback(() => {
         if (window.scrollY > 100) {

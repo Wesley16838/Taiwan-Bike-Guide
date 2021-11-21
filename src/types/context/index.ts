@@ -1,6 +1,8 @@
 export type MapContextState = {
+    userLocation: any,
     map: any,
     addMap: (newMap: any)=>void,
+    addUserLocation: any,
 }
 
 export type BikeContextState = {

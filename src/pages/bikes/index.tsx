@@ -9,18 +9,18 @@ import Switch from '../../components/switch/switch'
 import { CityData, AreaData } from '../../constants'
 import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
-
+import useCurrentLocation from '../../hooks/useCurrentLocation'
+import { UseMapContext } from '../../context/mapProvider'
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
 const BikePage: NextPage = () => {
-  console.log('BikePage')
-  const [load, setLoad] = useState(false)
+  const {userLocation} = UseMapContext()
   const [bikes, setBikes] = useState({
     stations: [],
     available: [],
     center: []
   })
-
+  const { location, error } = useCurrentLocation();
   const [search, setSearch] = useState({
     city: "",
     area: "",
@@ -64,8 +64,7 @@ const BikePage: NextPage = () => {
     }
   }
 
-  // let number = bikes.stations.length
-  let number = 10
+  let number = bikes.stations.length
 
   return (
     <Layout pageTitle={`自行車道地圖資訊整合網`} description={"全台自行車道報你知，自行車道和車站通通有！"} previewImage={"/images/preview_image.png"}>
@@ -79,7 +78,7 @@ const BikePage: NextPage = () => {
             <Switch isToggle={option!=='rent'} onToggle={() => setOption(option==='rent' ? 'return' : 'rent')} data={['租借','停車']}/>
             <Lists data={bikes.available} stationData={bikes.stations} type="bike"/>
           </div>
-          <MyMap option={option} data={bikes.available} stationData={bikes.stations} center={bikes.center} type="bike"/>
+          <MyMap option={option} data={bikes.available} stationData={bikes.stations} center={bikes.center} type="bike" userLocation={userLocation}/>
         </div>
     </Layout>
   )

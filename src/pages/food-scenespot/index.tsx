@@ -10,11 +10,14 @@ import Modal from '../../components/modal/modal'
 import { CityData, AreaData, postcal } from '../../constants'
 import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
+import { UseMapContext } from '../../context/mapProvider'
+import useCurrentLocation from '../../hooks/useCurrentLocation'
 
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
 const FoodScenespotPage: NextPage = () => {
-  console.log('FoodScenespotPage')
+  const { location, error } = useCurrentLocation();
+  const {userLocation} = UseMapContext()
   const [load, setLoad] = useState(false)
   const [select, setSelected] = useState({
     name:'',
@@ -100,8 +103,8 @@ const FoodScenespotPage: NextPage = () => {
     setIsShow(true)
   }
 
-  // let number = search.option ==='Restaurant' ? foods.food.length : scenespots.scenespot.length
-  let number = 10
+  let number = search.option ==='Restaurant' ? foods.food.length : scenespots.scenespot.length
+
   return (
     <Layout pageTitle={`自行車道地圖資訊整合網`} description={"全台自行車道報你知，自行車道和車站通通有！"} previewImage={"/images/preview_image.png"}>
         <div className={styles['main-block']}>
@@ -115,7 +118,7 @@ const FoodScenespotPage: NextPage = () => {
             <Lists data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } type="food" onClick={(val: any)=>handleOnListClick(val)}/>
           </div>
           <Modal select={select} onClick={setIsShow} isShow={isShow}/>
-          <MyMap data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } center={search.option==='Restaurant' ? foods.center : scenespots.center} type="food"/>
+          <MyMap data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } center={search.option==='Restaurant' ? foods.center : scenespots.center} type="food" userLocation={userLocation}/>
         </div>
     </Layout>
   )

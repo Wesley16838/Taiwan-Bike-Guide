@@ -8,11 +8,14 @@ import Lists from '../../components/lists/lists'
 import { CityData } from '../../constants'
 import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
+import { UseMapContext } from '../../context/mapProvider'
+import useCurrentLocation from '../../hooks/useCurrentLocation'
 
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
 const RoutePage: NextPage = () => {
-  console.log('RoutePage')
+  const { location, error } = useCurrentLocation();
+  const {userLocation} = UseMapContext()
   const [load, setLoad] = useState(false)
   const [routes, setRoutes] = useState({
     routes: [],
@@ -47,8 +50,7 @@ const RoutePage: NextPage = () => {
     setSearch({city: value})
   }
 
-  // let number = routes.routes.length
-  let number = 10
+  let number = routes.routes.length
   return (
     <Layout pageTitle={`自行車道地圖資訊整合網`} description={"全台自行車道報你知，自行車道和車站通通有！"} previewImage={"/images/preview_image.png"}>
         <div className={styles['main-block']}>
@@ -59,7 +61,7 @@ const RoutePage: NextPage = () => {
             </div>
             <Lists data={routes.routes} type="route"/>
           </div>
-          <MyMap data={routes} center={routes.center} type="route"/>
+          <MyMap data={routes} center={routes.center} type="route" userLocation={userLocation}/>
         </div>
     </Layout>
   )

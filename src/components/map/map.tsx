@@ -10,8 +10,7 @@ import { MapProps } from "../../types/components";
 var mapboxgl = require('mapbox-gl/dist/mapbox-gl.js');
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
-const Map = ({data, stationData, center, type, option}: MapProps) => {
-    console.log('Map')
+const Map = ({data, stationData, center, type, option, userLocation}: MapProps) => {
     const { addMap } = UseMapContext()
 
     useEffect(() => {
@@ -19,9 +18,17 @@ const Map = ({data, stationData, center, type, option}: MapProps) => {
             const map = new mapboxgl.Map({
                 container: "my-map",
                 style: "mapbox://styles/mapbox/streets-v11",
-                center: center.length === 0 ? [121.565427, 25.032964] : center,
+                center: center.length === 0 ? userLocation.latitude === '' ? [121.565427, 25.032964] : [userLocation.longitude, userLocation.latitude]: center,
                 zoom: 13
             })
+            if(typeof userLocation.latitude === 'number'){
+                console.log('add user')
+                const el = document.createElement('div');
+                el.className = 'marker-myself';
+                const marker = new mapboxgl.Marker(el)
+                .setLngLat([userLocation.longitude, userLocation.latitude])
+                .addTo(map);
+            }
             if(center.length !== 0 && type === 'bike') {
                 stationData.forEach((item: any) => {
                     const name = item.StationName['Zh_tw']
@@ -130,7 +137,7 @@ const Map = ({data, stationData, center, type, option}: MapProps) => {
             }
         }
         loadMap()
-    }, [center, option])
+    }, [center, option, userLocation])
 
     return(
         <div id="my-map" style={{ height: 'calc(100vh - 88px)', width: 'calc(100vw - 425px)', left: '425px'}}/>

@@ -50,7 +50,8 @@ export type MapProps = {
     stationData?: any,
     center: any[],
     type: string,
-    option?:any
+    option?:any,
+    userLocation?:any
 }
 
 export type SwitchProps = {

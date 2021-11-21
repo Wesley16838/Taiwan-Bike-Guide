@@ -44,6 +44,21 @@ a {
   outline-style: none;
 }
 
+.marker-myself {
+  background-image: url('/images/user-position.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 62px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: -20px;
+}
+
 .marker {
   background-image: url('/images/pin.svg');
   background-size: contain;

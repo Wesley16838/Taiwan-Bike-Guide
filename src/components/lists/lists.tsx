@@ -16,6 +16,7 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
     })
     const name = stationData.StationName['Zh_tw']
     let status = "";
+    const position = stationData.StationPosition
     switch (newObject.ServiceStatus){
         case 0:
             status = "停止營運"
@@ -40,7 +41,20 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
     }
 
     return(
-        <div className={styles['list-item--one']} key={name} onMouseEnter={() => map._markers[index].togglePopup()} onMouseLeave={() => map._markers[index].togglePopup()}>
+        <div 
+            className={styles['list-item--one']} 
+            key={name} 
+            onMouseEnter={() => map._markers[index].togglePopup()} 
+            onMouseLeave={() => map._markers[index].togglePopup()}
+            onClick={()=>{
+                if(position!==undefined) {
+                    map.flyTo({
+                        center: [position.PositionLon, position.PositionLat],
+                        zoom:15
+                    });
+                }
+            }}
+        >
             <p className={styles.title}>{name}</p>
             <div className={sharedStyle['flex-row--space']}>
                 <div className={`${styles.status} ${newObject.AvailableRentBikes > 5 && styles['normal']} ${newObject.AvailableRentBikes <= 5 && newObject.AvailableRentBikes !== 0 ? styles['limited'] : ''} ${newObject.AvailableRentBikes === 0 ? styles['disabled'] : 0}`}>
@@ -180,13 +194,22 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
     const city = data.City
     const url = data?.WebsiteUrl ? data.WebsiteUrl : ""
     const className = data?.Class ? data.Class : ""
+    const position = data.Position
     return(
         <div 
             className={styles['list-item--three']} 
             key={name+index} 
             onMouseEnter={() => map._markers[index].togglePopup()} 
             onMouseLeave={() => map._markers[index].togglePopup()}
-            onClick={()=>onClick(index)}
+            onClick={()=>{
+                if(position!==undefined) {
+                    map.flyTo({
+                        center: [position.PositionLon, position.PositionLat],
+                        zoom:15
+                    });
+                }
+                onClick(index)
+            }}
         >
             <div className={styles['image-container']}>
                 <Image 
@@ -235,7 +258,6 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
 
 // todo list => use stationData to loop not data
 const Lists = ({data, stationData, type, onClick}: ListProps) => {
-    console.log('lists')
     const renderList = () => {
         if(type === 'bike'){
             if(data.length !==0 && stationData.length === 0){
