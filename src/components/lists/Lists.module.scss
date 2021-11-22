@@ -61,12 +61,16 @@
             width: 280px;
             @include tablet{
                 width: unset;
+                margin: 5px 0px;
             }
         }
         .title{
             font-weight: $BOLD_FONT;
             font-size: $LARGE_FONT;
             color: $PRIMARY_DARK;
+            @include tablet{
+                margin-bottom: 5px;
+            }
         }
         .detail{
             color: $GRAY500;
