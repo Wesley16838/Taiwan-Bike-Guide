@@ -18,7 +18,8 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
     const name = stationData.StationName['Zh_tw']
     let status = "";
     const position = stationData.StationPosition
-    const indexNum = userLocation.latitute === '' ? index : index + 1
+    const indexNum = userLocation.latitute ? index + 1: index
+    console.log('userLocation.latitute,', userLocation.latitute)
     switch (newObject.ServiceStatus){
         case 0:
             status = "停止營運"
@@ -94,7 +95,7 @@ export const listItemStyleTwo = (data: any, index: number) => {
     const coordinates = data.Geometry.substring(18, data.Geometry.length - 2).split(',').map((item: any) => {
         return item.split(' ')
     })
-    const indexNum = userLocation.latitude === '' ? 0 : 1
+    const indexNum = userLocation.latitute ? index + 1: index
     return(
         <div className={styles['list-item--two']} key={name} 
         onClick={()=> {
@@ -198,7 +199,7 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
     const url = data?.WebsiteUrl ? data.WebsiteUrl : ""
     const className = data?.Class ? data.Class : ""
     const position = data.Position
-    const indexNum = userLocation.latitute === '' ? index : index + 1
+    const indexNum = userLocation.latitute ? index + 1: index
     return(
         <div 
             className={styles['list-item--three']} 
