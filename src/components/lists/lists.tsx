@@ -3,6 +3,7 @@ import styles from "./Lists.module.scss"
 import sharedStyle from "../../styles/base/Styles.module.scss"
 import Image from 'next/image'
 import Link from "next/link"
+import ScrollContainer from 'react-indiana-drag-scroll'
 import { UseMapContext } from "../../context/mapProvider"
 import startIcon from "../../../public/images/start.png"
 import endIcon from "../../../public/images/end.png"
@@ -57,7 +58,7 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
             }}
         >
             <p className={styles.title}>{name}</p>
-            <div className={sharedStyle['flex-row--space']}>
+            <div className={`${sharedStyle['flex-row--space']} ${styles['bottom-block']}`}>
                 <div className={`${styles.status} ${newObject.AvailableRentBikes > 5 && styles['normal']} ${newObject.AvailableRentBikes <= 5 && newObject.AvailableRentBikes !== 0 ? styles['limited'] : ''} ${newObject.AvailableRentBikes === 0 ? styles['disabled'] : 0}`}>
                     <p>可租借</p>
                     <p>{newObject.AvailableRentBikes}</p>
@@ -67,7 +68,7 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
                     <p>{newObject.AvailableReturnBikes}</p>
                 </div>
             </div>
-            <div className={sharedStyle['flex-row--space']}>
+            <div className={`${sharedStyle['flex-row--space']} ${styles['bottom-block']}`}>
                 <div className={`${styles.notice} ${status==='可借可還' ? styles.normal:''} ${status==='只可借車' || status==='只可還車' ? styles.alert:''} ${newObject.ServiceStatus!==1 ? styles.disabled:''}`}>
                     {
                         status
@@ -219,7 +220,7 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
                     src={data.Picture.PictureUrl1 === undefined ?  "/images/image_not_available.jpeg": data.Picture.PictureUrl1}
                     alt={data.Picture.PictureDescription1 === undefined ? "Picture" : data.Picture.PictureDescription1}    
                     layout={'fill'}
-                    objectFit={'cover'}
+                    objectFit={data.Picture.PictureUrl1 === undefined ? 'contain': 'cover'}
                 />
             </div>
             <div className={styles['bottom-section-container']}>
@@ -227,7 +228,7 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
                     <div className={styles.title}>
                         {name}
                     </div>
-                    <div className={styles.location}>
+                    <div className={styles['location-top']}>
                         <Image
                             src={locationIcon}                            
                             width={13}
@@ -241,17 +242,26 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
                     <div className={styles.class}>
                         {className ? className : "無分類"}
                     </div>
-                    <div>
-                    <Link href={url}>
-                        <a target="_blank" rel="noopener noreferrer" className={`${url==='' && styles.disalbed}`}>
-                            <Image
-                                src={url===''? '/images/disabled_web.svg' : '/images/web.svg'}
-                                width={26}
-                                height={26}
-                                alt={'url'}
-                            />
-                        </a>
-                    </Link>
+                    <div className={styles['location-bottom']}>
+                        <Image
+                            src={locationIcon}                            
+                            width={13}
+                            height={16}
+                            alt={'location'}
+                        />
+                        {city}
+                    </div>
+                    <div className={styles.link}>
+                        <Link href={url}>
+                            <a target="_blank" rel="noopener noreferrer" className={`${url==='' && styles.disalbed}`}>
+                                <Image
+                                    src={url===''? '/images/disabled_web.svg' : '/images/web.svg'}
+                                    width={26}
+                                    height={26}
+                                    alt={'url'}
+                                />
+                            </a>
+                        </Link>
                     </div> 
                 </div>
             </div>
@@ -297,11 +307,13 @@ const Lists = ({data, stationData, type, onClick}: ListProps) => {
         }
     }
     return(
-        <div className={styles['lists-container']}>
-            {
-                renderList()
-            }
-        </div>
+        <ScrollContainer className={styles.wrapper}>
+            <div className={styles['lists-container']}>
+                {
+                    renderList()
+                }
+            </div>
+        </ScrollContainer>
     )
 }
 

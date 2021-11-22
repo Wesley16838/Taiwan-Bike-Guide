@@ -1,14 +1,22 @@
 @import '../utilities/main.scss';
 .search-block{
-    width: 425px;
-    height: 100%;
+    width: 100%;
+    height: 270px;
     z-index: 9998;
     background-color: $WHITE;
-    @include absolute-left-top(0px, 0px);
+    @include absolute-bottom(0px);
     @include leftblock;
+    @include tablet{
+        width: 425px;
+        height: 100%;
+        @include absolute-left-top(0px, 0px);
+    }
     .search-result{
-        padding: 28px 32px 0px 32px;
+        padding: 20px 32px 0px 32px;
         margin: 0px;
+        @include tablet{
+            padding: 28px 32px 0px 32px;
+        }
         .search-result-count{
             margin-left: 12px;
             font-size: $MEDIUM_FONT;
@@ -20,8 +28,11 @@
 .main-block{
     overflow: hidden;
     position: relative;
-    height: calc(100vh - 88px);
+    height: calc(100vh - 50px);
     @include flex-row;
+    @include tablet{
+        height: calc(100vh - 88px);
+    }
 }
 
 .dropdown-wrapper{

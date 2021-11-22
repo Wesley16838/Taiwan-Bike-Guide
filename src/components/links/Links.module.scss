@@ -6,9 +6,12 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 8px 8px;
     margin: 0px 4px;
     @include transition-normal(1, .6);
+    @include tablet{
+        padding: 8px 16px;
+    }
     &.actived{
         color: $PRIMARY_NORMAL;
     }

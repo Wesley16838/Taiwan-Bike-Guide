@@ -13,7 +13,6 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN
 
 const Map = ({data, stationData, center, type, option, userLocation}: MapProps) => {
     const { addMap } = UseMapContext()
-    console.log('userLocation,', userLocation)
     useDeepEffect(() => {
         const loadMap = () => {
             const map = new mapboxgl.Map({
@@ -23,7 +22,6 @@ const Map = ({data, stationData, center, type, option, userLocation}: MapProps) 
                 zoom: 13
             })
             if(typeof userLocation.latitude === 'number'){
-                console.log('add user')
                 const el = document.createElement('div');
                 el.className = 'marker-myself';
                 const marker = new mapboxgl.Marker(el)
@@ -141,7 +139,7 @@ const Map = ({data, stationData, center, type, option, userLocation}: MapProps) 
     }, [center, option, userLocation])
 
     return(
-        <div id="my-map" style={{ height: 'calc(100vh - 88px)', width: 'calc(100vw - 425px)', left: '425px'}}/>
+        <div id="my-map"/>
     )
 }
 
