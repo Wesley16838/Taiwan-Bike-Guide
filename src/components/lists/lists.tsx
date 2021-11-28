@@ -19,7 +19,7 @@ export const listItemStyleOne = (stationData: any, data: any, index: number) => 
     let status = "";
     const position = stationData.StationPosition
     const indexNum = userLocation.latitute ? index + 1: index
-    console.log('userLocation.latitute,', userLocation.latitute)
+
     switch (newObject.ServiceStatus){
         case 0:
             status = "停止營運"
