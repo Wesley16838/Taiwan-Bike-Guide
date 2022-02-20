@@ -95,12 +95,11 @@ export const listItemStyleTwo = (data: any, index: number) => {
     const coordinates = data.Geometry.substring(18, data.Geometry.length - 2).split(',').map((item: any) => {
         return item.split(' ')
     })
-    const indexNum = userLocation.latitute ? index + 1: index
+    const indexNum = userLocation.latitude ? 1: 0
     return(
         <div className={styles['list-item--two']} key={name} 
         onClick={()=> {
             const mapLayer = map.getLayer('route');
-
             if(typeof mapLayer !== 'undefined') {
                 map._markers[indexNum].remove();
                 map._markers[indexNum].remove();
@@ -270,7 +269,6 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
     )
 }
 
-// todo list => use stationData to loop not data
 const Lists = ({data, stationData, type, onClick}: ListProps) => {
     const renderList = () => {
         if(type === 'bike'){
