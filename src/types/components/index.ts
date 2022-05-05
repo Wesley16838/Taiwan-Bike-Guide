@@ -51,7 +51,8 @@ export type MapProps = {
     center: any[],
     type: string,
     option?:any,
-    userLocation?:any
+    userLocation?:any,
+    onClick?: any,
 }
 
 export type SwitchProps = {

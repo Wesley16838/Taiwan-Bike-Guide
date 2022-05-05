@@ -33,7 +33,8 @@ module.exports = {
       'www.northguan-nsa.gov.tw',
       'www.focusline.com.tw',
       'www.taipeisprings.org.tw',
-      'www.facebook.com'
+      'www.facebook.com',
+      'travel.taichung.gov.tw'
     ],
   },
 }

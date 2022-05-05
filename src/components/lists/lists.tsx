@@ -203,8 +203,14 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
         <div 
             className={styles['list-item--three']} 
             key={name+index} 
-            onMouseEnter={() => map._markers[indexNum].togglePopup()} 
-            onMouseLeave={() => map._markers[indexNum].togglePopup()}
+            onMouseEnter={() => {
+                const popup = map._markers[indexNum].getPopup()
+                if(!popup.isOpen()) map._markers[indexNum].togglePopup()
+            }} 
+            onMouseLeave={() => {
+                const popup = map._markers[indexNum].getPopup()
+                if(popup.isOpen()) map._markers[indexNum].togglePopup()
+            }}
             onClick={()=>{
                 if(position!==undefined) {
                     map.flyTo({

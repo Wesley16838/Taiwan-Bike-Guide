@@ -118,7 +118,7 @@ const FoodScenespotPage: NextPage = () => {
             <Lists data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } type="food" onClick={(val: any)=>handleOnListClick(val)}/>
           </div>
           <Modal select={select} onClick={setIsShow} isShow={isShow}/>
-          <MyMap data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } center={search.option==='Restaurant' ? foods.center : scenespots.center} type="food" userLocation={userLocation}/>
+          <MyMap data={search.option==='Restaurant' ? foods.food : scenespots.scenespot } center={search.option==='Restaurant' ? foods.center : scenespots.center} type="food" userLocation={userLocation} onClick={(val: any)=>handleOnListClick(val)}/>
         </div>
     </Layout>
   )
