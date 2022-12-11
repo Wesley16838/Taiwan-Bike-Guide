@@ -11,6 +11,7 @@ import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
 import useCurrentLocation from '../../hooks/useCurrentLocation'
 import { UseMapContext } from '../../context/mapProvider'
+import { GetAuthorizationHeader } from '../../api/helper'
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
 const BikePage: NextPage = () => {
@@ -33,10 +34,19 @@ const BikePage: NextPage = () => {
             const city = search.city === 'Taoyuan' ? 'Taoyuan City' : search.city === 'NewTaipei' ? 'new taipei': search.city
             const result = await GEOAPI.get(encodeURI(`/${city} ${search.area}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`))
             const center = result.data.features[0].center
-
-            Promise.all([
-                API.get(encodeURI(`/Bike/Station/${search.city}?$spatialFilter=nearby(${result.data.features[0].center[1]},${result.data.features[0].center[0]},1000)&$format=JSON`)),
-                API.get(encodeURI(`/Bike/Availability/${search.city}?$format=JSON`)),
+            GetAuthorizationHeader()
+            .then(async (token: any) => {
+              Promise.all([
+                API.get(encodeURI(`/Bike/Station/City/${search.city}?$spatialFilter=nearby(${result.data.features[0].center[1]},${result.data.features[0].center[0]},1000)&$format=JSON`), {
+                  headers: {
+                      "authorization": "Bearer " + token,
+                  }
+                }),
+                API.get(encodeURI(`/Bike/Availability/City/${search.city}?$format=JSON`), {
+                  headers: {
+                      "authorization": "Bearer " + token,
+                  }
+                }),
             ])
             .then((data: any) => {
                 setBikes({
@@ -48,6 +58,8 @@ const BikePage: NextPage = () => {
             .catch(err => {
                 console.log('err,', err)
             })
+            })
+            
         }catch(err){
             // Handle Error Message here
             console.log('err,', err)

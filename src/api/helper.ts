@@ -1,14 +1,26 @@
-import jsSHA from "jssha";
-export function getAuthorizationHeader() {
-//  填入自己 ID、KEY 開始
-    let AppID = process.env.NEXT_PUBLIC_APP_ID as string;
-    let AppKey = process.env.NEXT_PUBLIC_APP_KEY as string;
-//  填入自己 ID、KEY 結束
-    let GMTString = new Date().toUTCString();
-    let ShaObj = new jsSHA('SHA-1', 'TEXT');
-    ShaObj.setHMACKey(AppKey, 'TEXT');
-    ShaObj.update('x-date: ' + GMTString);
-    let HMAC = ShaObj.getHMAC('B64');
-    let Authorization = 'hmac username=\"' + AppID + '\", algorithm=\"hmac-sha1\", headers=\"x-date\", signature=\"' + HMAC + '\"';
-    return { 'Authorization': Authorization, 'X-Date': GMTString }; 
+import axios from "axios";
+import { getWithExpiry, setWithExpiry } from "../utils/helper";
+
+export async function GetAuthorizationHeader() {
+    try{
+        const token = getWithExpiry('token');
+        if(token) return token;
+        const parameter: any = {
+            grant_type:"client_credentials",
+            client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
+            client_secret: process.env.NEXT_PUBLIC_CLIENT_SECRET
+        };
+        let auth_url: any = process.env.NEXT_PUBLIC_AUTH_URL;
+        const res:any = await axios.post(auth_url,  new URLSearchParams(parameter), {
+            headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        const new_token = res.data.access_token
+        setWithExpiry('token', new_token, 86400)
+        return new_token;
+    }catch(err) {
+        console.log(err)
+    }
 }

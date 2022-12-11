@@ -10,6 +10,7 @@ import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
 import { UseMapContext } from '../../context/mapProvider'
 import useCurrentLocation from '../../hooks/useCurrentLocation'
+import { GetAuthorizationHeader } from '../../api/helper'
 
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
@@ -33,11 +34,19 @@ const RoutePage: NextPage = () => {
         try{ 
             const resultOne = await GEOAPI.get(encodeURI(`/${city}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`))
             const center = resultOne.data.features[0].center
-            const resultTwo = await API.get(encodeURI(`/Cycling/Shape/${search.city}?$format=JSON`))
-            setRoutes({
-              center,
-              routes: resultTwo.data
-          })
+            GetAuthorizationHeader()
+            .then(async (token: any) => {
+              const resultTwo = await API.get(encodeURI(`/Cycling/Shape/City/${search.city}?$format=JSON`),{
+                headers: {
+                    "authorization": "Bearer " + token,
+                }
+              })
+              setRoutes({
+                center,
+                routes: resultTwo.data
+            })
+            })
+            
         }catch(err){
             // Handle Error Message here
             console.log('err,', err)

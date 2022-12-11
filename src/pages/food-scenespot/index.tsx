@@ -12,6 +12,7 @@ import API from '../../api/transport'
 import GEOAPI from '../../api/geocode'
 import { UseMapContext } from '../../context/mapProvider'
 import useCurrentLocation from '../../hooks/useCurrentLocation'
+import { GetAuthorizationHeader } from '../../api/helper'
 
 const MyMap = dynamic(() => import('../../components/map/map'), { ssr:false })
 
@@ -52,18 +53,25 @@ const FoodScenespotPage: NextPage = () => {
            const city = search.city === 'Taoyuan' ? 'Taoyuan City' : search.city === 'NewTaipei' ? 'new taipei': search.city
             const result = await GEOAPI.get(encodeURI(`/${city} ${search.area}.json?access_token=${process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN}`))
             const center = result.data.features[0].center
-            
-            API.get(encodeURI(`/Tourism/${search.option}/${search.city}?$spatialFilter=nearby(${center[1]},${center[0]},3000)&$format=JSON)`))
-            .then((data: any) => {
-                if(search.option === 'Restaurant'){
-                    setFoods({food: data.data, center})
-                } else {
-                    setScenespot({scenespot: data.data, center})
+            GetAuthorizationHeader()
+            .then(async (token: any) => {
+              API.get(encodeURI(`/Tourism/${search.option}/${search.city}?$spatialFilter=nearby(${center[1]},${center[0]},3000)&$format=JSON)`), {
+                headers: {
+                    "authorization": "Bearer " + token,
                 }
+              })
+              .then((data: any) => {
+                  if(search.option === 'Restaurant'){
+                      setFoods({food: data.data, center})
+                  } else {
+                      setScenespot({scenespot: data.data, center})
+                  }
+              })
+              .catch(err => {
+                  console.log('err,', err)
+              })
             })
-            .catch(err => {
-                console.log('err,', err)
-            })
+            
         }catch(err){
             // Handle Error Message here
             console.log('err,', err)

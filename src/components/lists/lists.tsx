@@ -198,18 +198,18 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
     const url = data?.WebsiteUrl ? data.WebsiteUrl : ""
     const className = data?.Class ? data.Class : ""
     const position = data.Position
-    const indexNum = userLocation.latitute ? index + 1: index
+    const indexNum = userLocation.latitude ? index + 1: index
     return(
         <div 
             className={styles['list-item--three']} 
             key={name+index} 
             onMouseEnter={() => {
-                const popup = map._markers[indexNum].getPopup()
-                if(!popup.isOpen()) map._markers[indexNum].togglePopup()
+                const popup = map._markers[indexNum].getPopup();
+                if(!popup.isOpen()) map._markers[indexNum].togglePopup();
             }} 
             onMouseLeave={() => {
-                const popup = map._markers[indexNum].getPopup()
-                if(popup.isOpen()) map._markers[indexNum].togglePopup()
+                const popup = map._markers[indexNum].getPopup();
+                if(popup.isOpen()) map._markers[indexNum].togglePopup();
             }}
             onClick={()=>{
                 if(position!==undefined) {
@@ -218,7 +218,7 @@ export const listItemStyleThree = (data: any, index: number, onClick: any) => {
                         zoom:15
                     });
                 }
-                onClick(index)
+                onClick(index);
             }}
         >
             <div className={styles['image-container']}>
